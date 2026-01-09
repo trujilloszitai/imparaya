@@ -1,0 +1,80 @@
+<div class="row">
+  <div class="col-12">
+    <h1>Dashboard de Estudiante</h1>
+    <p class="lead"><%= user_greeting(current_user) %></p>
+  </div>
+</div>
+<div class="row mt-4">
+  <%= student_stat_cards(@upcoming_bookings.count, current_user.bookings.count) %>
+</div>
+<div class="row mt-4">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Próximas Clases</h5>
+      </div>
+      <div class="card-body">
+        <%= render_bookings_or_empty(@upcoming_bookings, 
+            empty_message: "No tienes clases próximas. #{link_to 'Explorar mentores', mentors_path}".html_safe) do %>
+          <div class="list-group">
+            <% @upcoming_bookings.each do |booking| %>
+              <div class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-1">
+                      <%= booking.availability.mentor.full_name %>
+                    </h6>
+                    <small class="text-muted">
+                      <%= format_booking_datetime(booking.starts_at) %>
+                    </small>
+                  </div>
+                  <div>
+                    <span class="badge bg-<%= booking.pending? ? 'success' : 'warning' %>"> <%# pending: add colors for every different status %>
+                      <%= booking.status.capitalize %>
+                    </span>
+                    <%= link_to "Ver", students_booking_path(booking), class: "btn btn-sm btn-primary ms-2" %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Acciones Rápidas</h5>
+      </div>
+      <div class="card-body">
+        <%= link_to "Ver Todas las Reservas", students_bookings_path, class: "btn btn-primary w-100 mb-2" %>
+        <%= link_to "Explorar Mentores", mentors_path, class: "btn btn-primary w-100 mb-2" %>
+        <%= link_to "Ver Categorías", categories_path, class: "btn btn-secondary w-100" %>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-header">
+        <h5 class="mb-0">Clases pasadas</h5>
+      </div>
+      <div class="card-body">
+        <% if @previous_bookings.any? %>
+          <ul class="list-unstyled mb-0">
+            <% @bookings.each do |booking| %>
+              <li class="mb-2">
+                <small>
+                  <%= link_to students_booking_path(booking) do %>
+                    <%= booking.availability.mentor.full_name %> - 
+                    <%= booking.created_at.strftime("%d/%m") %>
+                  <% end %>
+                </small>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-muted mb-0">¡Aún no has tomado ninguna clase!</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

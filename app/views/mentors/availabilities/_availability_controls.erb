@@ -1,0 +1,19 @@
+<div class="d-flex gap-2 mt-4">
+  <% if user_signed_in? %>
+    <% if current_user.mentor? && current_user.id == availability.mentor_id %>
+      <%= link_to "Editar", edit_mentors_availability_path(availability), class: "btn btn-warning btn-secondary me-2" %>
+      <%= link_to "Eliminar", mentors_availability_path(availability),
+        method: :delete,
+        data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este horario?" },
+        class: "btn btn-sm btn-danger" %>
+      <%= link_to "Volver", mentors_availabilities_path(mentor_id: current_user.id), class: "btn btn-secondary" %>
+    <% else %>
+      <% if current_user.student? %>
+        <%= link_to "Agendar una clase", new_students_booking_path(availability_id: availability.id), class: "btn btn-sm btn-primary" %>
+      <% else %>
+        <%= link_to "Iniciar sesión para agendar una clase", new_user_session_path, class: "btn btn-primary" %>
+      <% end %>
+      <%= link_to "Volver", weekly_schedule_mentor_path(id: availability.mentor_id), class: "btn btn-secondary" %>
+    <% end %>
+  <% end %>
+</div>

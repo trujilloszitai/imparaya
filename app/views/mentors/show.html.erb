@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card mb-4">
+      <div class="card-body">
+        <h1 class="card-title"><%= @mentor.full_name %></h1>
+        <%= mentor_about_section(@mentor) %>
+        <%= mentor_contact_info(@mentor) %>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Horarios Semanales</h5>
+      </div>
+      <div class="card-body">
+        <%= link_to "Ver Calendario Completo", mentor_path(@mentor), class: "btn btn-primary mb-3" %>
+        <%= render_availabilities_or_empty(@mentor.availabilities.order(:day_of_week, :starts_at), 
+            empty_message: "Este mentor no tiene horarios disponibles actualmente.") do %>
+          <div class="list-group">
+            <% @mentor.availabilities.order(:day_of_week, :starts_at).each do |availability| %>
+              <div class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-1">
+                      <%= day_name(availability.day_of_week) %>
+                    </h6>
+                    <small class="text-muted">
+                      <%= format_availability_time_range(availability) %>
+                    </small>
+                  </div>
+                  <div class="text-end">
+                    <%= availability_price_badge(availability) %>
+                    <% if availability.capacity %>
+                      <br>
+                      <small class="text-muted"><%= availability_capacity_text(availability) %></small>
+                    <% end %>
+                  </div>
+                </div>
+                <% if availability.description.present? %>
+                  <p class="mb-0 mt-2 small"><%= availability.description %></p>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Acciones</h5>
+      </div>
+      <div class="card-body">
+        <%= mentor_primary_action_button(@mentor) %>
+        <%= link_to "Volver a Mentores", mentors_path, class: "btn btn-secondary w-100" %>
+      </div>
+    </div>
+  </div>
+</div>

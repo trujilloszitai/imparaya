@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-12">
+    <h1>Clases Disponibles - <%= @category.name %></h1>
+    <div class="card mt-4">
+      <div class="card-body">
+        <% if @availabilities.any? %>
+          <%= render "shared/availabilities/availabilities_calendar", availabilities: @availabilities, show_mentor: true %>
+        <% else %>
+          <div class="alert alert-info">
+            No hay horarios disponibles para esta categoría en este momento.
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <%= link_to "Volver a Categorías", categories_path, class: "btn btn-secondary mt-3" %>
+  </div>
+</div>

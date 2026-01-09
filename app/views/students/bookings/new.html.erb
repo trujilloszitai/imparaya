@@ -1,0 +1,72 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="mb-0">Nueva Reserva</h2>
+      </div>
+      <div class="card-body">
+        <%= simple_form_for @booking, url: students_bookings_path do |f| %>
+          <%= f.input :availability_id, 
+                      as: :hidden, 
+                      input_html: { value: @availability&.id } %>
+          <% if @availability %>
+            <div class="mb-3">
+              <h5>Detalles del horario</h5>
+              <div class="d-flex flex-column gap-3">
+                <div>
+                  <strong>Mentor:</strong>
+                  <%= @availability.mentor.full_name %>
+                </div>
+                <div>
+                  <strong>Hora:</strong>
+                  <%= @availability.starts_at.strftime("%H:%M") %> - 
+                  <%= @availability.ends_at.strftime("%H:%M") %><br>
+                </div>
+                <div>
+                  <strong>Precio:</strong>
+                  <span class="badge bg-success w-auto">
+                    $<%= number_with_precision(@availability.price_per_hour, precision: 2) %>/h
+                  </span><br>
+                </div>
+                <div>
+                  <strong>Categoría:</strong>
+                  <span class="badge w-auto" style="background-color: <%= @availability.category.color %>;">
+                    <%= @availability.category.name %>
+                  </span>
+                </div>
+              </p>
+            </div>
+            <%= f.input :starts_at, collection: @slot_options, disabled: @disabled_slots, label: "Fechas disponibles:", include_blank: "Elige una fecha" %>
+          <% else %>
+            <%= f.association :availability, 
+                            collection: Availability.upcoming.available.includes(:mentor, :category),
+                            label_method: lambda { |availability| 
+                              "#{availability.mentor.full_name} - #{availability.starts_at.strftime('%d/%m/%Y %H:%M')} - $#{availability.price_per_hour}/hr"
+                            },
+                            include_blank: "Seleccionar horario" %>
+          <% end %>
+          <div class="d-grid gap-2">
+            <%= f.button :submit, "Confirmar Reserva", class: "btn btn-primary btn-lg" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-4">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="mb-0">Información</h5>
+    </div>
+    <div class="card-body">
+      <p class="small text-muted">
+        Al confirmar la reserva, recibirás un correo de confirmación con los detalles.
+      </p>
+      <p class="small text-muted">
+        Puedes cancelar la reserva hasta 24 horas antes del inicio.
+      </p>
+    </div>
+  </div>
+  <%= link_to "Cancelar", students_bookings_path, class: "btn btn-secondary w-100 mt-3" %>
+</div>
+</div>

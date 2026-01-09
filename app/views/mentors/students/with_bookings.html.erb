@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div>
+        <h1>Mis Estudiantes</h1>
+        <h4 class="text-muted">Con reservas activas</h4>
+      </div>
+      <%= link_to "Todos los estudiantes", mentors_students_path, class: "btn btn-secondary" %>
+    </div>
+    <div class="card mt-4">
+      <div class="card-body">
+        <% if @students.any? %>
+          <div class="row">
+            <% @students.each do |student| %>
+              <div class="col-md-6 col-lg-4 mb-3">
+                <div class="card h-100 border-success"
+                  data-controller="nav"
+                  data-nav-url-value="<%= mentors_student_path(student) %>"
+                  data-action="click->nav#goToUrl"
+                  style="cursor: pointer;"
+                  >
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <%= student.first_name %> <%= student.last_name %>
+                    </h5>
+                    <p class="card-text">
+                      <small class="text-muted">
+                        <strong>Email:</strong> <%= student.email %><br>
+                        <strong>Teléfono:</strong> <%= student.phone %><br>
+                        <strong>Reservas activas:</strong>
+                        <%= student.bookings.by_mentor(current_user)
+                              .where.not(status: 'cancelled')
+                              .count %>
+                      </small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="alert alert-info">
+            No hay estudiantes con reservas activas.
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="container-sm w-25">
+  <h2>Regístrate</h2>
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.input :email, label:"Correo electrónico", input_html: { autofocus: true } %>
+    <%= f.input :first_name, label:"Nombre", input_html: { minlength: 3 } %>
+    <%= f.input :last_name, label:"Apellido", input_html: { minlength: 3 } %>
+    <%= f.input :phone, label:"Teléfono (opcional)", input_html: { type: 'tel'}, required:false %>
+    <%= f.input :password, label: "Contraseña" %>
+    <%= f.input :password_confirmation, label: "Confirmar contraseña" %>
+    <%= f.input :role, as: :radio_buttons, collection: [["Estudiante", "student"], ["Mentor", "mentor"]], selected:"student", label:"Registrarse como...", wrapper_html:{ class: "d-flex flex-column flex-nowrap" } %>
+    <div>
+      <%= f.button :submit, "Registrarse", class:"btn-primary" %>
+      <div >
+        <label>
+          ¿Ya tienes una cuenta?
+        </label>
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  <% end %>
+</div>

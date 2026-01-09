@@ -1,0 +1,110 @@
+<div class="row">
+  <div class="col-12">
+    <h1>Dashboard de Mentor</h1>
+    <p class="lead"><%= user_greeting(current_user) %></p>
+  </div>
+</div>
+<div class="row mt-4">
+  <%= mentor_stat_cards(@availabilities.count, @upcoming_bookings.count) %>
+</div>
+<div class="row mt-4">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Próximas Clases</h5>
+      </div>
+      <div class="card-body">
+        <%= render_bookings_or_empty(@upcoming_bookings, empty_message: "No tienes clases programadas.") do %>
+          <div class="list-group">
+            <% @upcoming_bookings.each do |booking| %>
+              <div class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-1">
+                      <%= booking.student.full_name %>
+                    </h6>
+                    <small class="text-muted">
+                      <%= format_booking_datetime(booking.starts_at) %>
+                    </small>
+                  </div>
+                  <div>
+                    <span class="badge bg-<%= booking.status == 'confirmed' ? 'success' : 'warning' %>">
+                      <%= booking.status.capitalize %>
+                    </span>
+                    <%= link_to "Ver", mentors_booking_path(booking), class: "btn btn-sm btn-primary ms-2" %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-header">
+        <h5 class="mb-0">Reservas Recientes</h5>
+      </div>
+      <div class="card-body">
+        <%= render_bookings_or_empty(@recent_bookings, empty_message: "No hay reservas recientes.") do %>
+          <div class="list-group">
+            <% @recent_bookings.each do |booking| %>
+              <div class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 class="mb-1">
+                      <%= booking.student.full_name %>
+                    </h6>
+                    <small class="text-muted">
+                      Creada: <%= format_booking_datetime(booking.created_at) %>
+                    </small>
+                  </div>
+                  <div>
+                    <span class="badge bg-<%= case booking.status
+                      when 'confirmed' then 'success'
+                      when 'pending' then 'warning'
+                      when 'cancelled' then 'danger'
+                      else 'secondary'
+                    end %>">
+                      <%= booking.status.capitalize %>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Acciones Rápidas</h5>
+      </div>
+      <div class="card-body">
+        <%= link_to "Gestionar horarios", mentors_availabilities_path, class: "btn btn-primary w-100 mb-2" %>
+        <%= link_to "Tus clases", mentors_bookings_path, class: "btn btn-primary w-100 mb-2" %>
+        <%= link_to "Ver Estudiantes", mentors_students_path, class: "btn btn-secondary w-100 mb-2" %>
+      </div>
+    </div>
+    <div class="card mt-3">
+      <div class="card-header">
+        <h5 class="mb-0">Horarios Semanales</h5>
+      </div>
+      <div class="card-body">
+        <%= render_availabilities_or_empty(@availabilities, empty_message: link_to("Crear tu primer horario", new_mentors_availability_path).html_safe) do %>
+          <ul class="list-unstyled mb-0">
+            <% @availabilities.limit(5).each do |availability| %>
+              <li class="mb-2">
+                <small>
+                  <strong><%= day_name(availability.day_of_week) %></strong><br>
+                  <%= format_availability_time_range(availability) %>
+                </small>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

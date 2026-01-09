@@ -1,0 +1,7 @@
+<%= week_calendar(number_of_weeks: 1, heading: false) do |date| %>
+  <% @availabilities.each do |availability| %>
+    <% if availability.day_of_week == date.wday %>
+      <%= render "shared/availabilities/availability_calendar_card", availability: availability, mentor: local_assigns.has_key?(:show_mentor) ? availability.mentor : nil %>
+    <% end %>
+  <% end %>
+<% end %>

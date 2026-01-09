@@ -1,0 +1,145 @@
+$green: #198754;
+$red: #dc3545;
+$blue: #0d6efd;
+$yellow: #ffc107;
+$grey: #6c757d;
+
+$success: $green;
+$info: $blue;
+$warning: $yellow;
+$danger: $red;
+$secondary: $grey;
+
+.w-fit-content {
+  width: fit-content;
+}
+
+.clickable {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+        transform: translateY(-2px);
+    }
+}
+
+.calendar-container {
+    overflow: visible;
+}
+
+.calendar-card {
+    width: 11rem;
+}
+
+.badge {
+    font-weight: 500;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+.btn {
+    transition: all 0.2s;
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: $blue;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+}
+
+.alert {
+    border-left: 4px solid;
+}
+
+.alert-success {
+    border-left-color: $success;
+}
+
+.alert-danger {
+    border-left-color: $danger;
+}
+
+.alert-info {
+    border-left-color: $info;
+}
+
+.alert-warning {
+    border-left-color: $warning;
+}
+
+.list-group-item {
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card {
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    display: block;
+    transition: transform 0.3s;
+
+    &:hover {
+        transform: scale(1.05);
+        color: white;
+    }
+}
+
+.turbo-progress-bar {
+    background-color: $blue;
+    height: 3px;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+    .calendar-container {
+        overflow-x: auto;
+    }
+    .calendar-card {
+        width: 9rem;
+    }
+}
+@media (max-width: 768px) {
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+}
+
+.status-pending {
+    background-color: $warning;
+    color: #000;
+}
+
+.status-paid {
+    background-color: $success;
+}
+
+.status-cancelled {
+    background-color: $secondary;
+}
+
+.status-rejected {
+    background-color: $danger;
+}

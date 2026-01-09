@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="mb-0">Editar Horario</h2>
+      </div>
+      <div class="card-body">
+        <%= simple_form_for @availability, url: mentors_availability_path(@availability) do |f| %>
+          <%= f.input :day_of_week, 
+                      collection: Date::DAYNAMES.each_with_index.map { |day, index| [day, index] },
+                      label: "Día de la Semana",
+                      include_blank: false %>
+          <%= f.input :starts_at, 
+                      as: :time,
+                      label: "Hora de Inicio",
+                      html5: true %>
+          <%= f.input :ends_at, 
+                      as: :time,
+                      label: "Hora de Fin",
+                      html5: true %>
+          <%= f.input :price_per_hour, 
+                      label: "Precio por Hora",
+                      input_html: { step: 0.01 } %>
+          <%= f.input :capacity, 
+                      label: "Capacidad (lugares disponibles)" %>
+          <%= f.input :description, 
+                      as: :text,
+                      label: "Descripción",
+                      input_html: { rows: 4 },
+                      hint: "Describe brevemente el tipo de sesión o temas a tratar" %>
+          <div class="d-grid gap-2">
+            <%= f.button :submit, "Actualizar Horario", class: "btn btn-primary btn-lg" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Acciones</h5>
+      </div>
+      <div class="card-body">
+        <%= link_to "Ver Detalles", mentors_availability_path(@availability), class: "btn btn-info w-100 mb-2" %>
+        <%= button_to "Eliminar Horario", 
+            mentors_availability_path(@availability), 
+            method: :delete,
+            class: "btn btn-danger w-100",
+            data: { turbo_confirm: "¿Estás seguro? Las reservas asociadas ya creadas permanecerán intactas." } %>
+      </div>
+    </div>
+    <%= link_to "Cancelar", mentors_availabilities_path, class: "btn btn-secondary w-100 mt-3" %>
+  </div>
+</div>

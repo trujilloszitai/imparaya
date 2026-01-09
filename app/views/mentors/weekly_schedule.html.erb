@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-12">
+    <h1><%= @mentor.full_name %> - Horarios Semanales</h1>
+    <div class="d-flex">
+      <div class="card-body card-body d-flex justify-content-center calendar-container">
+        <% if @mentor.availabilities.any? %>
+          <%= render "shared/availabilities/availabilities_calendar", availabilities: @mentor.availabilities %>
+        <% else %>
+          <div class="alert alert-info">
+            No hay horarios disponibles para este mentor en ese momento. <%= link_to "Explora otros horarios", mentors_path, class: "alert-link" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <%= link_to "Volver al Perfil", mentor_path(@mentor), class: "btn btn-secondary mt-3" %>
+  </div>
+</div>

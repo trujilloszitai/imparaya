@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1>Mis Reservas</h1>
+      <%= new_booking_link_for_student %>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <%= render_bookings_or_empty(@bookings, empty_message: "No has agendado ninguna clase aún. #{link_to 'Explorar mentores', mentors_path, class: 'alert-link'}".html_safe) do %>
+          <%= render "shared/bookings/bookings_calendar", bookings: @bookings %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="card calendar-card clickable fs-6 "
+                    data-controller="nav" 
+                    data-nav-url-value="<%= mentors_availability_path(availability.id) %>"
+                    data-action="click->nav#goToUrl"
+  >
+  <div class="card-body fs-6">
+    <h6 class="card-title">
+      <% if local_assigns.has_key?(:mentor) && mentor.present? %>
+        <%= mentor.full_name %>
+      <% else %>
+        <%= availability.category.name %>
+      <% end %>
+    </h6>
+    <h6 class="card-subtitle mb-2 text-muted">Cupos: <%= availability.capacity.present? ? availability.capacity : "¡Ilimitados!" %></h6>
+    <p class="card-text">
+      <span>$<%= number_with_precision(availability.price_per_hour, precision: 2) %>/h</span>
+      <strong class="d-flex"><%= availability.starts_at.strftime("%H:%M") %> - <%= availability.ends_at.strftime("%H:%M") %></strong>
+    </p>
+  </div>
+  <div class="w-auto px-2 pb-2">
+    <div class="w-auto rounded" style="background-color: <%= availability.category.color %>; height: 10px"></div>
+  </div>
+</div>

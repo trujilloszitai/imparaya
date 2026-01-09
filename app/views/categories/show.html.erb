@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center mb-3">
+          <% if @category.color.present? %>
+            <div class="rounded-circle me-3" style="width: 50px; height: 50px; background-color: <%= @category.color %>;"></div>
+          <% end %>
+          <h1 class="mb-0"><%= @category.name %></h1>
+        </div>
+        <p class="lead text-muted">
+          Explora los horarios disponibles en esta categoría
+        </p>
+        <%= link_to "Ver Clases Disponibles", availabilities_category_path(@category), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-body">
+        <%= link_to "Volver a Categorías", categories_path, class: "btn btn-secondary w-100" %>
+      </div>
+    </div>
+  </div>
+</div>

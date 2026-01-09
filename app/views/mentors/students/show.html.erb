@@ -1,0 +1,118 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="mb-0">Perfil del Estudiante</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <h6 class="text-muted">Nombre Completo</h6>
+            <p class="h5"><%= @student.first_name %> <%= @student.last_name %></p>
+          </div>
+          <div class="col-md-6 mb-3">
+            <h6 class="text-muted">Email</h6>
+            <p><%= @student.email %></p>
+          </div>
+          <div class="col-md-6 mb-3">
+            <h6 class="text-muted">Teléfono</h6>
+            <p><%= @student.phone %></p>
+          </div>
+          <div class="col-md-6 mb-3">
+            <h6 class="text-muted">Total de Reservas</h6>
+            <p class="h5"><%= @bookings.count %></p>
+          </div>
+          <% if @student.biography.present? %>
+            <div class="col-12 mb-3">
+              <h6 class="text-muted">Biografía</h6>
+              <p><%= @student.biography %></p>
+            </div>
+          <% end %>
+        </div>
+        <%= link_to "Volver", mentors_students_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Estadísticas</h5>
+      </div>
+      <div class="card-body">
+        <p>
+          <strong>Total de reservas:</strong> <%= @bookings.count %><br>
+          <strong>Confirmadas:</strong> <%= @bookings.where(status: 'confirmed').count %><br>
+          <strong>Pendientes:</strong> <%= @bookings.where(status: 'pending').count %><br>
+          <strong>Canceladas:</strong> <%= @bookings.where(status: 'cancelled').count %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Historial de Reservas</h5>
+      </div>
+      <div class="card-body">
+        <% if @bookings.any? %>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Horario</th>
+                  <th>Categoría</th>
+                  <th>Precio</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @bookings.each do |booking| %>
+                  <tr>
+                    <td><%= booking.starts_at.strftime("%d/%m/%Y") %></td>
+                    <td>
+                      <%= booking.starts_at.strftime("%H:%M") %> - 
+                      <%= booking.ends_at.strftime("%H:%M") %>
+                    </td>
+                    <td>
+                      <% if booking.availability.category %>
+                        <span class="badge" style="background-color: <%= booking.availability.category.color %>;">
+                          <%= booking.availability.category.name %>
+                        </span>
+                      <% end %>
+                    </td>
+                    <td>
+                      <span class="badge bg-success">
+                        $<%= number_with_precision(booking.price, precision: 2) %>
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge bg-<%= case booking.status
+                        when 'paid' then 'success'
+                        when 'pending' then 'warning'
+                        when 'rejected' then 'danger'
+                        else 'secondary'
+                      end %>">
+                        <%= booking.status.capitalize %>
+                      </span>
+                    </td>
+                    <td>
+                      <%= link_to "Ver", mentors_booking_path(booking), class: "btn btn-sm btn-primary" %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <div class="alert alert-info mb-0">
+            Este estudiante no tiene reservas.
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

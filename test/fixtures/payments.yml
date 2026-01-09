@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  booking: one
+  mp_payment_id: MyString
+  status: MyString
+  status_detail: MyString
+  payment_method_id: MyString
+  transaction_amount: 9.99
+  net_received_amount: 9.99
+  external_reference: MyString
+  payer_email: MyString
+
+two:
+  booking: two
+  mp_payment_id: MyString
+  status: MyString
+  status_detail: MyString
+  payment_method_id: MyString
+  transaction_amount: 9.99
+  net_received_amount: 9.99
+  external_reference: MyString
+  payer_email: MyString

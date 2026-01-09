@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="mb-0">Nuevo Horario</h2>
+      </div>
+      <div class="card-body">
+        <%= simple_form_for(@availability, url: mentors_availabilities_path) do |f| %>
+          <%= f.input :day_of_week, collection: Date::DAYNAMES.each_with_index.map { |day, index| [day, index] },label: "Día de la Semana",include_blank: false %>
+          <%= f.input :category_id, collection: @categories, label: "Categoría", include_blank: true %>
+          <%= f.input :starts_at, as: :time,label: "Hora de inicio",html5: true %>
+          <%= f.input :ends_at, as: :time,label: "Hora de fin",html5: true %>
+          <%= f.input :price_per_hour, label: "Precio por hora",input_html: { step: 0.01 } %>
+          <%= f.input :capacity, label: "Capacidad (cupos disponibles)" %>
+          <%= f.input :description, as: :text,label: "Descripción",input_html: { rows: 4 },hint: "Describe brevemente el tipo de sesión o temas a tratar" %>
+          <div class="d-grid gap-2">
+            <%= f.button :submit, "Crear Horario", class: "btn btn-primary btn-lg" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">¿Para qué definir mir horarios?</h5>
+      </div>
+      <div class="card-body">
+        <p class="small text-muted">
+          Define tus horarios semanales recurrentes. Estos serán la base para generar las clases disponibles.
+        </p>
+        <p class="small text-muted">
+          Las clases se generarán automáticamente al inicio de cada semana, pero también puedes generarlos manualmente.
+        </p>
+      </div>
+    </div>
+    <%= link_to "Cancelar", mentors_availabilities_path, class: "btn btn-secondary w-100 mt-3" %>
+  </div>
+</div>

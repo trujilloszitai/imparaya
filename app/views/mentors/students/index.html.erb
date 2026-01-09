@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-12">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1>Mis Estudiantes</h1>
+      <%= link_to "Con reservas activas", with_bookings_mentors_students_path, class: "btn btn-info" %>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <% if @students.any? %>
+          <div class="row">
+            <% @students.each do |student| %>
+              <div class="col-md-6 col-lg-4 mb-3">
+                <div class="card h-100"
+                  data-controller="nav"
+                  data-nav-url-value="<%= mentors_student_path(student) %>"
+                  data-action="click->nav#goToUrl"
+                  style="cursor: pointer;"
+                  >
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      <%= student.first_name %> <%= student.last_name %>
+                    </h5>
+                    <p class="card-text">
+                      <small class="text-muted">
+                        <strong>Email:</strong> <%= student.email %><br>
+                        <strong>Teléfono:</strong> <%= student.phone %><br>
+                        <strong>Reservas:</strong> <%= student.bookings.joins(:availability).by_mentor(current_user).count %>
+                      </small>
+                    </p>
+                    <span class="d-flex justify-content-center badge w-25 bg-primary">Ver perfil</span>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="alert alert-info">
+            No tienes estudiantes con reservas aún.
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

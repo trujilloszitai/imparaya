@@ -1,0 +1,15 @@
+<div class="card calendar-card clickable fs-6"
+                    data-controller="nav" 
+                    data-nav-url-value="<%= show_booking_path(booking) %>"
+                    data-action="click->nav#goToUrl"
+  >
+  <div class="card-body fs-6">
+    <h6 class="card-title"><%= booking_participant_name(booking, current_user) %></h6>
+    <h6 class="card-subtitle mb-2 text-muted"><%= booking.availability.category.name %></h6>
+    <p class="card-text">
+      <span><%= format_booking_datetime(booking.starts_at) %></span>
+      <span>Precio: <%= booking_price_badge(booking) %></span>
+      <%= booking_status_badge(booking) %>
+    </p>
+  </div>
+</div>

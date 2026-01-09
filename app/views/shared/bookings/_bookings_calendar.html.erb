@@ -1,0 +1,5 @@
+<%= month_calendar(events: bookings, attribute: :starts_at, end_attribute: :ends_at) do |date, bookings_on_date| %>
+  <% bookings_on_date.each do |booking| %>
+    <%= render "shared/bookings/booking_calendar_card", booking: booking %>
+  <% end %>
+<% end %>

@@ -1,0 +1,29 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card border-success">
+        <div class="card-body text-center py-5">
+          <div class="mb-4">
+            <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+          </div>
+          <h1 class="text-success mb-3">¡Pago exitoso!</h1>
+          <p class="lead mb-4">Tu reserva ha sido confirmada y pagada correctamente.</p>
+          <div class="bg-light rounded p-4 mb-4">
+            <h5 class="mb-3">Detalles de la reserva</h5>
+            <p class="mb-1"><strong>Reserva:</strong> #<%= @booking.id %></p>
+            <p class="mb-1"><strong>Mentor:</strong> <%= @booking.availability.mentor.full_name %></p>
+            <p class="mb-1"><strong>Fecha:</strong> <%= I18n.l(@booking.starts_at, format: :long) %></p>
+            <p class="mb-1"><strong>Monto:</strong> $<%= number_with_precision(@booking.price, precision: 2) %></p>
+            <% if params[:payment_id].present? %>
+              <p class="mb-0"><strong>ID de pago:</strong> <code><%= params[:payment_id] %></code></p>
+            <% end %>
+          </div>
+          <div class="d-grid gap-2">
+            <%= link_to "Ver detalles de la reserva", students_booking_path(@booking), class: "btn btn-success btn-lg" %>
+            <%= link_to "Volver a mis reservas", students_bookings_path, class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

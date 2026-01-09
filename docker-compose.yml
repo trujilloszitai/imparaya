@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+      - "80:80"
+    environment:
+      RAILS_ENV: development
+      RAILS_LOG_TO_STDOUT: "1"
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY:-development-key}
+    volumes:
+      # code & config (sync)
+      - .:/rails
+      # dependencies & cache
+      - bundle_cache:/usr/local/bundle
+      - node_modules:/rails/node_modules
+      - vendor_bundle:/rails/vendor/bundle
+      # directories with lots of events
+      - /rails/tmp
+      - /rails/log
+      # persistent storage
+      - storage_data:/rails/storage
+      # bootsnap cache
+      - bootsnap_cache:/rails/tmp/bootsnap
+    stdin_open: true
+    tty: true
+    command: bin/dev
+
+volumes:
+  # named volumes that require persistence through resets
+  bundle_cache:
+    driver: local
+  node_modules:
+    driver: local
+  vendor_bundle:
+    driver: local
+  storage_data:
+    driver: local
+  bootsnap_cache:
+    driver: local

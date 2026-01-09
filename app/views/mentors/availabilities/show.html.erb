@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="mb-0">Detalles del Horario</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <h6 class="text-muted">Día de la Semana</h6>
+            <p class="h5"><%= Date::DAYNAMES[@availability.day_of_week] %></p>
+          </div>
+          <div class="col-md-6 mb-3">
+            <h6 class="text-muted">Horario</h6>
+            <p class="h5">
+              <%= @availability.starts_at.strftime("%H:%M") %> - 
+              <%= @availability.ends_at.strftime("%H:%M") %>
+            </p>
+          </div>
+          <div class="col-md-6 mb-3">
+            <h6 class="text-muted">Precio por Hora</h6>
+            <p class="h4 text-success">
+              $<%= number_with_precision(@availability.price_per_hour, precision: 2) %>
+            </p>
+          </div>
+          <div class="col-md-6 mb-3">
+            <h6 class="text-muted">Capacidad</h6>
+            <p class="h5"><%= @availability.capacity || '¡Ilimitada!' %></p>
+          </div>
+          <% if @availability.description.present? %>
+            <div class="col-12 mb-3">
+              <h6 class="text-muted">Descripción</h6>
+              <p><%= @availability.description %></p>
+            </div>
+          <% end %>
+          <% if @availability.category %>
+            <div class="col-12 mb-3">
+              <h6 class="text-muted">Categoría</h6>
+              <p>
+                <span class="badge fs-6" style="background-color: <%= @availability.category.color %>;">
+                  <%= @availability.category.name %>
+                </span>
+              </p>
+            </div>
+          <% end %>
+        </div>
+        <%= render "availability_controls", availability: @availability %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0">Información</h5>
+      </div>
+      <div class="card-body">
+        <p class="small text-muted">
+          Creado el <%= @availability.created_at.strftime("%d/%m/%Y") %>
+        </p>
+        <% if @availability.updated_at != @availability.created_at %>
+          <p class="small text-muted">
+            Última actualización: <%= @availability.updated_at.strftime("%d/%m/%Y %H:%M") %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

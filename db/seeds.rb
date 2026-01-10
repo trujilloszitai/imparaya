@@ -60,8 +60,8 @@ class AddInitialAvailabilities < ActiveRecord::Migration[8.1]
         Faker::Config.random = Random.new(mentor.id + day_of_week)
         infinite_capacity = Faker::Boolean.boolean(true_ratio: 0.1)
 
-        from_time = Time.zone.today.change(hour: 8)
-        to_time   = Time.zone.today.change(hour: 20)
+        from_time = DateTime.current.change(hour: 6)
+        to_time = DateTime.current.change(hour: 21)
         base_time = Faker::Time.between(from: from_time, to: to_time).change(min: 0, sec: 0).to_time
 
         Availability.find_or_create_by!(
@@ -71,8 +71,8 @@ class AddInitialAvailabilities < ActiveRecord::Migration[8.1]
           starts_at: base_time,
           ends_at: base_time + 2.hours,
           capacity: infinite_capacity ? nil : Faker::Number.within(range: 1..30),
-          price_per_hour: Faker::Number.decimal(l_digits: 4, r_digits: 2),
-          description: "Disponibilidad de #{mentor.first_name + ' ' + mentor.last_name}"
+          price_per_hour: Faker::Number.within(range: 10...50),
+          description: "Disponibilidad de #{mentor.full_name}"
         )
       end
     end

@@ -171,14 +171,14 @@ WEBHOOK_URL=https://tu-id-aleatorio.ngrok-free.app
 
 El proyecto utiliza **SQLite3**, por lo que la base de datos es un archivo local dentro del contenedor y no requiere un servicio de Docker externo.
 
-1. **Inicializar la base de datos:** Dentro de la terminal del Devcontainer, ejecuta: \
+1. **Inicializar la base de datos:** Dentro de la terminal del Devcontainer, ejecuta:
 ```bash
 $ bin/rails db:create
 
 $ bin/rails db:migrate
 ```
 
-2. **Cargar datos de prueba (Seeds):** Para poblar la base de datos de ejemplo: \
+2. **Cargar datos de prueba (Seeds):** Para poblar la base de datos de ejemplo:
 ```bash
 $ bin/rails db:seed
 ```

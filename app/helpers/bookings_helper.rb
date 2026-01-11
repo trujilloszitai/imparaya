@@ -67,4 +67,24 @@ module BookingsHelper
   def new_booking_link_for_student
     link_to "Nueva Reserva", mentors_path, class: "btn btn-primary"
   end
+
+  def pay_booking_button(booking)
+    if booking.pending?
+      button_to "Pagar Ahora",
+        checkout_students_booking_path(booking.id),
+        method: :post,
+        class: "btn btn-success",
+        data: {
+          turbo: false
+        }
+    elsif booking.rejected?
+      button_to "Reintentar Pago",
+        checkout_students_booking_path(booking.id),
+        method: :post,
+        class: "btn btn-warning",
+        data: {
+          turbo: false
+        }
+    end
+  end
 end

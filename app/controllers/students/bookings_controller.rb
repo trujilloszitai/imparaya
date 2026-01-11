@@ -13,6 +13,7 @@ module Students
 
     # GET /students/bookings/:id
     def show
+      @last_payment = @booking.payments.order(created_at: :desc).first
     end
 
     # GET /students/bookings/new
@@ -98,65 +99,36 @@ module Students
 
     # POST /students/bookings/:id/checkout
     def checkout
-      preference_data = build_preference_data(@booking)
+      # Rails.logger.info "init_point: #{preference['init_point']}"
+      # Rails.logger.info "sandbox_init_point: #{preference['sandbox_init_point']}"
+      # Rails.logger.info "========================="
+      if @booking.present?
+        back_urls = {
+          success: payment_success_students_booking_url(@booking),
+          failure: payment_failure_students_booking_url(@booking),
+          pending: payment_pending_students_booking_url(@booking)
+        }
 
-      preference_response = $mp.preference.create(preference_data)
-      preference = preference_response[:response]
+        preference = MercadoPagoService.create_preference(@booking, current_user, back_urls)
 
-      Rails.logger.info "=== MERCADOPAGO DEBUG ==="
-      Rails.logger.info "Response: #{preference_response.inspect}"
-      Rails.logger.info "init_point: #{preference['init_point']}"
-      Rails.logger.info "sandbox_init_point: #{preference['sandbox_init_point']}"
-      Rails.logger.info "========================="
+        Rails.logger.info "=== PAGO DEBUG ==="
+        Rails.logger.info "Response: #{preference.inspect}"
 
-      if preference["id"]
-        @booking.update(preference_id: preference["id"])
-        # when using TEST- credentials, use sandbox_init_point
-        # when using production credentials, use init_point
-        checkout_url = preference["init_point"]
-        Rails.logger.info "Redirecting to: #{checkout_url}"
-        redirect_to checkout_url, allow_other_host: true
+        if preference[:status] == 201
+          @booking.update(preference_id: preference[:response]["id"])
+
+          # please use preference["sandbox_init_point"] when using test credentials
+          # use preference["init_point"] when using production credentials
+          redirect_to preference[:response]["sandbox_init_point"], allow_other_host: true
+        else
+          redirect_to students_booking_path(@booking), alert: "Error al crear la preferencia de pago"
+        end
       else
-        redirect_to students_booking_path(@booking), alert: "Error al crear la preferencia de pago"
+        redirect_to root_path, alert: "Reserva no encontrada"
       end
     end
 
     private
-
-    def build_preference_data(booking)
-      payer_email = Rails.env.production? ? current_user.email : "test_user@testuser.com"
-
-      {
-        items: [
-          {
-            id: booking.id.to_s,
-            title: "Clase con #{booking.availability.mentor.full_name} - #{booking.availability.category&.name}",
-            description: "Clase el #{I18n.l(booking.starts_at, format: :short)}",
-            quantity: 1,
-            currency_id: "ARS",
-            unit_price: booking.price.to_f
-          }
-        ],
-        payer: {
-          email: payer_email,
-          name: current_user.first_name,
-          surname: current_user.last_name
-        },
-        payment_methods: {
-          excluded_payment_types: [],
-          excluded_payment_methods: [],
-          installments: 12
-        },
-        back_urls: {
-          success: payment_success_students_booking_url(booking),
-          failure: payment_failure_students_booking_url(booking),
-          pending: payment_pending_students_booking_url(booking)
-        },
-        auto_return: "approved",
-        external_reference: booking.id.to_s,
-        notification_url: nil
-      }
-    end
 
     def process_payment(payment_id, booking)
       payment_response = $mp.payment.get(payment_id)

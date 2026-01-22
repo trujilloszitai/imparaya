@@ -1,14 +1,4 @@
-$green: #198754;
-$red: #dc3545;
-$blue: #0d6efd;
-$yellow: #ffc107;
-$grey: #6c757d;
-
-$success: $green;
-$info: $blue;
-$warning: $yellow;
-$danger: $red;
-$secondary: $grey;
+@use "variables" as v;
 
 .w-fit-content {
   width: fit-content;
@@ -21,6 +11,11 @@ $secondary: $grey;
     &:hover {
         transform: translateY(-2px);
     }
+}
+
+.bg-primary {
+    background-color: v.$blue !important;
+    color: v.$light !important;
 }
 
 .calendar-container {
@@ -36,7 +31,7 @@ $secondary: $grey;
 }
 
 .table-hover tbody tr:hover {
-    background-color: rgba(13, 110, 253, 0.05);
+    background-color: v.$blue-opacity-05;
 }
 
 .btn {
@@ -44,14 +39,14 @@ $secondary: $grey;
 
     &:hover {
         transform: translateY(-1px);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: v.$shadow-sm;
     }
 }
 
 .form-control:focus,
 .form-select:focus {
-    border-color: $blue;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    border-color: v.$blue;
+    box-shadow: 0 0 0 0.25rem v.$blue-opacity-15;
 }
 
 .alert {
@@ -59,51 +54,60 @@ $secondary: $grey;
 }
 
 .alert-success {
-    border-left-color: $success;
+    border-left-color: v.$success;
 }
 
 .alert-danger {
-    border-left-color: $danger;
+    border-left-color: v.$danger;
 }
 
 .alert-info {
-    border-left-color: $info;
+    border-left-color: v.$info;
 }
 
 .alert-warning {
-    border-left-color: $warning;
+    border-left-color: v.$warning;
 }
 
 .list-group-item {
     transition: background-color 0.2s;
 
     &:hover {
-        background-color: rgba(13, 110, 253, 0.05);
+        background-color: v.$blue-opacity-05;
     }
 }
 
 .navbar {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: v.$shadow-sm;
+    background-color: v.$light !important;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: v.$blue;
+    font-weight: 500;
+
+    &:hover {
+        color: v.$purple;
+    }
 }
 
 .dashboard-card {
-    border-radius: 8px;
+    border-radius: v.$border-radius-lg;
     padding: 20px;
     margin-bottom: 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: v.$gradient-primary;
+    color: v.$white;
     text-decoration: none;
     display: block;
     transition: transform 0.3s;
 
     &:hover {
         transform: scale(1.05);
-        color: white;
+        color: v.$white;
     }
 }
 
 .turbo-progress-bar {
-    background-color: $blue;
+    background-color: v.$blue;
     height: 3px;
 }
 
@@ -128,18 +132,18 @@ $secondary: $grey;
 }
 
 .status-pending {
-    background-color: $warning;
-    color: #000;
+    background-color: v.$warning;
+    color: v.$black;
 }
 
 .status-paid {
-    background-color: $success;
+    background-color: v.$success;
 }
 
 .status-cancelled {
-    background-color: $secondary;
+    background-color: v.$secondary;
 }
 
 .status-rejected {
-    background-color: $danger;
+    background-color: v.$danger;
 }

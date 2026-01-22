@@ -117,9 +117,9 @@ module Students
         if preference[:status] == 201
           @booking.update(preference_id: preference[:response]["id"])
 
-          # please use preference["sandbox_init_point"] when using test credentials
-          # use preference["init_point"] when using production credentials
-          redirect_to preference[:response]["sandbox_init_point"], allow_other_host: true
+          # please use preference[:response]["sandbox_init_point"] when using test credentials
+          # use preference[:response]["init_point"] when using production credentials
+          redirect_to preference[:response]["init_point"], allow_other_host: true
         else
           redirect_to students_booking_path(@booking), alert: "Error al crear la preferencia de pago"
         end

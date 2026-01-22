@@ -1,0 +1,86 @@
+@use "variables" as v;
+
+.hero-section {
+    background: v.$gradient-primary;
+    border-radius: v.$border-radius-md;
+    box-shadow: v.$shadow-lg;
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
+
+.feature-card {
+    background: v.$white;
+    border-radius: v.$border-radius-md;
+    box-shadow: v.$shadow-md;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+        transform: translateY(-8px);
+        box-shadow: v.$shadow-hover-md;
+    }
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    font-size: 2rem;
+}
+
+.category-card {
+    transition: all 0.3s;
+    border: 2px solid transparent;
+
+    &:hover {
+        border-color: v.$blue;
+        box-shadow: v.$shadow-hover-sm !important;
+    }
+}
+
+.category-icon {
+    font-size: 3rem;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+}
+
+.cta-section {
+    background: v.$gradient-primary;
+    border-radius: v.$border-radius-md;
+    box-shadow: v.$shadow-lg;
+    margin-left: -1rem;
+    margin-right: -1rem;
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 3rem 1rem !important;
+        
+        h1 {
+            font-size: 2rem !important;
+        }
+        
+        .lead {
+            font-size: 1.1rem !important;
+        }
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .category-icon {
+        font-size: 2rem;
+    }
+    
+    .cta-section {
+        padding: 3rem 1rem !important;
+        
+        h2 {
+            font-size: 2rem !important;
+        }
+    }
+}

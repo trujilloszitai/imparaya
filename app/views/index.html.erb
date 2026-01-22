@@ -34,7 +34,7 @@
             <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1 4 11.794z"/>
           </svg>
         </div>
-        <h3 class="h4 mb-3">Mentores Verificados</h3>
+        <h3 class="h4 mb-3">Tutores Verificados</h3>
         <p class="text-muted">Aprende con profesionales calificados y experimentados en sus áreas de expertise.</p>
       </div>
     </div>
@@ -116,6 +116,9 @@
   <div class="container">
     <h2 class="display-4 fw-bold mb-4">¿Listo para comenzar?</h2>
     <p class="lead mb-4">Únete a miles de estudiantes que ya están aprendiendo con ImparaYa</p>
-    <%= link_to "Explorar Mentores", mentors_path, class: "btn btn-light btn-lg px-5 py-3" %>
+    <div>
+      <%= link_to "Crear cuenta", new_user_registration_path, class: "btn btn-light btn-lg px-5 py-3 me-3" %>
+      <%= link_to "Ingresar", new_user_registration_path, class: "btn btn-light btn-lg px-5 py-3 me-3" %>
+    </div>
   </div>
 </div>

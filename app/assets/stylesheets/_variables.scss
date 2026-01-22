@@ -1,22 +1,28 @@
-// Colores primarios
+// Color palette
 $green: #198754;
 $red: #dc3545;
 $blue: #667eea;
-$purple: #764ba2;
 $yellow: #ffc107;
 $grey: #6c757d;
-$white: #FFFFFF;
+$purple-800: #7161ef;
+$purple-600: #957fef;
+$purple-400: #b79ced;
+$purple-200: #dec0f1;
+$sand: #efd9ce;
 $light: #F5F5F5;
 $black: #0B1215;
+$melon: #edf67d;
+$mint: #a5e6ba;
 
-// Colores semánticos
+// Semantic colors
 $success: $green;
 $info: $blue;
 $warning: $yellow;
 $danger: $red;
 $secondary: $grey;
+$text-light: $light;
+$text-dark: $black;
 
-// Opacidades de colores
 $blue-opacity-05: rgba(13, 110, 253, 0.05);
 $blue-opacity-15: rgba(13, 110, 253, 0.15);
 $blue-opacity-20: rgba(13, 110, 253, 0.2);
@@ -25,15 +31,20 @@ $black-opacity-07: rgba(0, 0, 0, 0.07);
 $black-opacity-10: rgba(0, 0, 0, 0.1);
 $black-opacity-15: rgba(0, 0, 0, 0.15);
 
-// Sombras
+$purple-opacity-05: rgba(113, 97, 239, 0.05);
+$purple-opacity-15: rgba(113, 97, 239, 0.15);
+$purple-opacity-20: rgba(113, 97, 239, 0.2);
+$purple-opacity-30: rgba(113, 97, 239, 0.3);
+
+// Shadows
 $shadow-sm: 0 2px 4px $black-opacity-10;
 $shadow-md: 0 4px 6px $black-opacity-07;
 $shadow-lg: 0 10px 40px $blue-opacity-30;
 $shadow-hover-sm: 0 8px 16px $blue-opacity-20;
 $shadow-hover-md: 0 12px 24px $black-opacity-15;
 
-// Gradientes
-$gradient-primary: linear-gradient(135deg, $blue 0%, $purple 100%);
+// Gradients
+$gradient-primary: linear-gradient(135deg, $blue 0%, $purple-800 100%);
 
 // Border radius
 $border-radius-sm: 0.5rem;

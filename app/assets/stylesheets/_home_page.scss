@@ -9,7 +9,7 @@
 }
 
 .feature-card {
-    background: v.$white;
+    background: v.$light;
     border-radius: v.$border-radius-md;
     box-shadow: v.$shadow-md;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -31,7 +31,7 @@
     border: 2px solid transparent;
 
     &:hover {
-        border-color: v.$blue;
+        border-color: v.$purple-800;
         box-shadow: v.$shadow-hover-sm !important;
     }
 }

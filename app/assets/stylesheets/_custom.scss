@@ -13,9 +13,17 @@
     }
 }
 
+.primary-link {
+    color: v.$purple-600;
+
+    &:hover {
+        color: v.$purple-800;
+    }
+}
+
 .bg-primary {
-    background-color: v.$purple-800 !important;
-    color: v.$text-light !important;
+    background-color: v.$purple-800;
+    color: v.$text-light;
 }
 
 .calendar-container {
@@ -50,7 +58,7 @@
     border-color: v.$purple-600;
     color: v.$text-light;
     
-    &:hover {
+    &:hover, &:focus {
         border-color: v.$purple-800;
         background-color: v.$purple-800;
     }
@@ -58,8 +66,9 @@
 
 .btn-light {
     background-color: v.$light;
+    color: v.$purple-800;
     
-    &:hover {
+    &:hover, &:focus {
         color: v.$text-light;
         background-color: v.$purple-600;
         border-color: v.$purple-600;
@@ -68,18 +77,40 @@
 
 .btn-outline-light {
     color: v.$light;
+    background-color: v.$purple-800;
     border-color: v.$light;
 
-    &:hover {
+    &:hover, &:focus {
         background-color: v.$light;
         color: v.$purple-800;
     }
+}
+
+.border-primary {
+    border-color: v.$purple-600 !important;
+}
+
+.form-container {
+    max-width: 500px;
 }
 
 .form-control:focus,
 .form-select:focus {
     border-color: v.$purple-800;
     box-shadow: 0 0 0 0.25rem v.$purple-opacity-15;
+}
+
+.form-check-input{
+    border-color: v.$purple-600;
+
+    &:checked {
+        background-color: v.$purple-800 !important;
+        border-color: v.$purple-800;
+    }
+}
+
+.form-check-label {
+    color: v.$purple-800 !important;
 }
 
 .alert {
@@ -114,7 +145,7 @@
     box-shadow: v.$shadow-sm;
     background-color: v.$text-light !important;
 }
-.navbar-light .navbar-nav .nav-link {
+.navbar-light .navbar-nav .nav-link{
     color: v.$purple-600;
     font-weight: 500;
 

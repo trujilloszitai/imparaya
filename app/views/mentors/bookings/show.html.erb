@@ -16,9 +16,7 @@
           </div>
           <div class="col-md-6 mb-3">
             <h6 class="text-muted">Estado</h6>
-            <%= simple_form_for @booking, 
-                url: update_status_mentors_booking_path(booking: { id:@booking.id, status: @booking.status }),
-                method: :patch do |f| %>
+            <%= simple_form_for( @booking, url: mentors_booking_path(@booking), method: :patch) do |f| %>
               <%= f.input :status,
                           collection: Booking.statuses.keys,
                           selected: @booking.status,

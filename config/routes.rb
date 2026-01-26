@@ -32,11 +32,7 @@ Rails.application.routes.draw do
 
         resources :availabilities
 
-        resources :bookings, only: [ :index, :show, :update ] do
-          member do
-            patch :update_status
-          end
-        end
+        resources :bookings, only: [ :index, :show, :update ]
 
         # each mentor can manage their own students
         resources :students, only: [ :index, :show ] do

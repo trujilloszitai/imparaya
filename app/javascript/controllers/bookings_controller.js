@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["status", "form"]
+  static targets = ["form", "status", "updateButton"]
   
   connect() {
     console.log("Bookings controller connected")
@@ -13,6 +13,14 @@ export default class extends Controller {
     
     // Submit form via Turbo
     form.requestSubmit()
+  }
+
+  toggleSubmit(event) {
+    event.preventDefault()
+    const currentStatus = event.target.dataset.currentStatus
+    const statusSelect = this.statusTarget
+    const updateButton = this.updateButtonTarget
+    updateButton.disabled = (statusSelect.value == currentStatus)
   }
   
   confirmCancel(event) {

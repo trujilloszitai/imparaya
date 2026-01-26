@@ -16,13 +16,23 @@
           </div>
           <div class="col-md-6 mb-3">
             <h6 class="text-muted">Estado</h6>
-            <%= simple_form_for( @booking, url: mentors_booking_path(@booking), method: :patch) do |f| %>
+            <%= simple_form_for(@booking, url: mentors_booking_path(@booking), method: :patch, html: { data: { controller: "bookings", bookings_target: "form" } }) do |f| %>
               <%= f.input :status,
-                          collection: Booking.statuses.keys,
-                          selected: @booking.status,
-                          label: false,
-                          input_html: { class: 'form-select' } %>
-              <%= f.submit "Actualizar Estado", class: "btn btn-sm btn-primary mt-2" %>
+                    collection: Booking.statuses.keys,
+                    selected: @booking.status,
+                    label: false,
+                    input_html: { 
+                      class: 'form-select', 
+                      data: { 
+                        bookings_target: "status",
+                        action: "change->bookings#toggleSubmit",
+                        current_status: @booking.status 
+                      } 
+                    } %>
+              <%= f.submit "Actualizar Estado", 
+                    class: "btn btn-sm btn-primary mt-2", 
+                    data: { bookings_target: "updateButton" },
+                    disabled: true %>
             <% end %>
           </div>
           <div class="col-md-6 mb-3">

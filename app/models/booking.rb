@@ -16,8 +16,6 @@ class Booking < ApplicationRecord
   joins(:availability).where(availabilities: { mentor_id: mentor.id })
 }
 
-  scope :by_status, ->(statuses) { where(status: statuses) }
-
   scope :by_date, ->(date) {
     where(starts_at: date.to_date.all_day)
   }
@@ -30,7 +28,7 @@ class Booking < ApplicationRecord
 
   scope :previous, -> { where("bookings.ends_at < ?", Time.current) }
 
-  scope :cancelled, -> { by_status(2) }
+  scope :cancelled, -> { where(status: :cancelled) }
 
   scope :overlapping, ->(start_time, end_time) {
     where("TIME(starts_at) < ? AND TIME(ends_at) > ?", start_time, end_time)

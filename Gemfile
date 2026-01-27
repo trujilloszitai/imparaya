@@ -75,8 +75,6 @@ gem "jquery-rails"
 
 gem "bootstrap", "~> 5.3.5"
 
-gem "bootstrap-icons"
-
 gem "htmlbeautifier", "~> 1.4"
 
 gem "simple_form"

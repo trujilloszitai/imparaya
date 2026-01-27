@@ -29,7 +29,7 @@
             </div>
           <% end %>
         </div>
-        <%= link_to "Volver", mentors_students_path, class: "btn btn-secondary" %>
+        <%= render "shared/components/go_back_button" %>
       </div>
     </div>
   </div>
@@ -95,7 +95,7 @@
                       </span>
                     </td>
                     <td>
-                      <%= link_to "Ver", mentors_booking_path(booking), class: "btn btn-sm btn-primary" %>
+                      <%= link_to "Ver", mentors_booking_path(booking), class: "btn btn btn-primary" %>
                     </td>
                   </tr>
                 <% end %>

@@ -5,15 +5,14 @@
       <%= link_to "Eliminar", mentors_availability_path(availability),
         method: :delete,
         data: { turbo_confirm: "¿Estás seguro de que deseas eliminar este horario?" },
-        class: "btn btn-sm btn-danger" %>
-      <%= link_to "Volver", mentors_availabilities_path(mentor_id: current_user.id), class: "btn btn-secondary" %>
+        class: "btn btn btn-danger" %>
     <% else %>
       <% if current_user.student? %>
-        <%= link_to "Agendar una clase", new_students_booking_path(availability_id: availability.id), class: "btn btn-sm btn-primary" %>
+        <%= link_to "Agendar una clase", new_students_booking_path(availability_id: availability.id), class: "btn btn btn-primary" %>
       <% else %>
         <%= link_to "Iniciar sesión para agendar una clase", new_user_session_path, class: "btn btn-primary" %>
       <% end %>
-      <%= link_to "Volver", weekly_schedule_mentor_path(id: availability.mentor_id), class: "btn btn-secondary" %>
     <% end %>
+    <%= render "shared/components/go_back_button" %>
   <% end %>
 </div>

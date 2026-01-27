@@ -23,7 +23,7 @@
           </div>
           <div class="d-grid gap-2">
             <%= link_to "Ver detalles de la reserva", students_booking_path(@booking), class: "btn btn-warning btn-lg" %>
-            <%= link_to "Volver a mis reservas", students_bookings_path, class: "btn btn-outline-secondary" %>
+            <%= render "shared/components/go_back_button" %>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :availabilities, foreign_key: :mentor_id, dependent: :destroy
   has_many :bookings, foreign_key: :student_id
+  has_many :payments, through: :bookings
 
   # maybe should add some scopes
   scope :mentors, -> { where(role: :mentor) }

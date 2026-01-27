@@ -25,7 +25,7 @@
           <div class="d-grid gap-2">
             <%= button_to "Reintentar pago", checkout_students_booking_path(@booking), method: :post, class: "btn btn-danger btn-lg", data: { turbo: false } %>
             <%= link_to "Ver detalles de la reserva", students_booking_path(@booking), class: "btn btn-outline-secondary" %>
-            <%= link_to "Volver a mis reservas", students_bookings_path, class: "btn btn-outline-secondary" %>
+            <%= render "shared/components/go_back_button" %>
           </div>
         </div>
       </div>

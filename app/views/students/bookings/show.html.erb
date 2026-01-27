@@ -70,7 +70,7 @@
           <% end %>
         </div>
         <div class="d-flex gap-2 mt-4">
-          <%= link_to "Volver a Mis Reservas", students_bookings_path, class: "btn btn-secondary" %>
+          <%= render "shared/components/go_back_button" %>
           <% if @booking.cancelled? %>
             <span class="badge bg-danger fs-6 align-self-center">Reserva Cancelada - Contacte a su mentor para más información</span>
           <% elsif !@booking.paid? %>

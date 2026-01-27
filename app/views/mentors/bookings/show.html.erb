@@ -30,7 +30,7 @@
                       } 
                     } %>
               <%= f.submit "Actualizar Estado", 
-                    class: "btn btn-sm btn-primary mt-2", 
+                    class: "btn btn btn-primary mt-2", 
                     data: { bookings_target: "updateButton" },
                     disabled: true %>
             <% end %>
@@ -74,7 +74,7 @@
           </div>
         </div>
         <div class="d-flex gap-2 mt-4">
-          <%= link_to "Volver a mis clases", mentors_bookings_path, class: "btn btn-secondary" %>
+          <%= render "shared/components/go_back_button" %>
           <%= link_to "Ver estudiante", mentors_student_path(@student), class: "btn btn-info" %>
           <%= link_to "Acerca de este horario", mentors_availability_path(@booking.availability), class: "btn btn-primary" %>
         </div>

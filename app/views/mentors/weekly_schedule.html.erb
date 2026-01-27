@@ -2,7 +2,7 @@
   <div class="col-12">
     <h1><%= @mentor.full_name %> - Horarios Semanales</h1>
     <div class="d-flex">
-      <div class="card-body card-body d-flex justify-content-center calendar-container">
+      <div class="card-body calendar-container">
         <% if @mentor.availabilities.any? %>
           <%= render "shared/availabilities/availabilities_calendar", availabilities: @mentor.availabilities %>
         <% else %>
@@ -12,6 +12,6 @@
         <% end %>
       </div>
     </div>
-    <%= link_to "Volver al Perfil", mentor_path(@mentor), class: "btn btn-secondary mt-3" %>
+    <%= render "shared/components/go_back_button" %>
   </div>
 </div>

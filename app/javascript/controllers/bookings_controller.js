@@ -17,9 +17,11 @@ export default class extends Controller {
 
   toggleSubmit(event) {
     event.preventDefault()
+    
     const currentStatus = event.target.dataset.currentStatus
     const statusSelect = this.statusTarget
     const updateButton = this.updateButtonTarget
+
     updateButton.disabled = (statusSelect.value == currentStatus)
   }
   

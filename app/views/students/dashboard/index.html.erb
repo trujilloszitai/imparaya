@@ -29,7 +29,7 @@
                     </small>
                   </div>
                   <div>
-                    <span class="badge bg-<%= booking.pending? ? 'success' : 'warning' %>"> <%# pending: add colors for every different status %>
+                    <span class="badge status-<%= booking.status %>">
                       <%= booking.status.capitalize %>
                     </span>
                     <%= link_to "Ver", students_booking_path(booking), class: "btn btn-sm btn-primary ms-2" %>

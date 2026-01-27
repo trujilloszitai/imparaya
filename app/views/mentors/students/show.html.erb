@@ -90,12 +90,7 @@
                       </span>
                     </td>
                     <td>
-                      <span class="badge bg-<%= case booking.status
-                        when 'paid' then 'success'
-                        when 'pending' then 'warning'
-                        when 'rejected' then 'danger'
-                        else 'secondary'
-                      end %>">
+                      <span class="badge status-<%=booking.status%>">
                         <%= booking.status.capitalize %>
                       </span>
                     </td>

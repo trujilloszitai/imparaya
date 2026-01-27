@@ -23,6 +23,12 @@ $secondary: $grey;
 $text-light: $light;
 $text-dark: $black;
 
+// Booking status badges
+$paid: $success;
+$pending: $warning;
+$cancelled: $secondary;
+$rejected: $danger;
+
 $blue-opacity-05: rgba(13, 110, 253, 0.05);
 $blue-opacity-15: rgba(13, 110, 253, 0.15);
 $blue-opacity-20: rgba(13, 110, 253, 0.2);

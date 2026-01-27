@@ -28,7 +28,7 @@
                     </small>
                   </div>
                   <div>
-                    <span class="badge bg-<%= booking.status == 'confirmed' ? 'success' : 'warning' %>">
+                    <span class="badge status-<%= booking.status %>">
                       <%= booking.status.capitalize %>
                     </span>
                     <%= link_to "Ver", mentors_booking_path(booking), class: "btn btn-sm btn-primary ms-2" %>
@@ -59,12 +59,7 @@
                     </small>
                   </div>
                   <div>
-                    <span class="badge bg-<%= case booking.status
-                      when 'confirmed' then 'success'
-                      when 'pending' then 'warning'
-                      when 'cancelled' then 'danger'
-                      else 'secondary'
-                    end %>">
+                    <span class="badge status-<%= booking.status %>">
                       <%= booking.status.capitalize %>
                     </span>
                   </div>

@@ -17,12 +17,7 @@
           <div class="col-md-6 mb-3">
             <h6 class="text-muted">Estado</h6>
             <p>
-              <span class="badge bg-<%= case @booking.status
-                when 'paid' then 'success'
-                when 'pending' then 'warning'
-                when 'rejected' then 'danger'
-                else 'secondary'
-              end %> fs-6">
+              <span class="badge status-<%= @booking.status %> fs-6">
                 <%= @booking.status.capitalize %>
               </span>
             </p>

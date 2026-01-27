@@ -83,7 +83,7 @@ gem "simple_calendar"
 
 gem "faker", "~> 3.5"
 
-gem "rails-i18n", "~> 8.0.0"
+gem "rails-i18n", "~> 8.1.0"
 
 gem "acts_as_paranoid", "~> 0.11.0"
 
